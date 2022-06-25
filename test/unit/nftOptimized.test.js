@@ -12,4 +12,15 @@ const { developmentChains } = require("../../helper-hardhat-config");
         deployer = accounts[0];
         nftOptimized = await ethers.getContract("NftOptimized");
       });
+
+      it("Allows users to mint an NFT, and updates appropriately", async function () {
+        const txResponse = await nftOptimized.mintNft();
+        await txResponse.wait(1);
+        const tokenURI = await nftOptimized.tokenURI(0);
+        console.log(tokenURI);
+        // const tokenCounter = await nftOptimized.getTokenCounter();
+
+        // assert.equal(tokenCounter.toString(), "1");
+        // assert.equal(tokenURI, await nftOptimized.TOKEN_URI());
+      });
     });
